@@ -33,11 +33,11 @@ RUN pip install Django \
   && pip freeze \
   && python -m django --version
 
-RUN django-admin startproject hello_app \
-  && cd hello_app \
+RUN django-admin startproject hello \
+  && cd hello \
   && ls -lisah
 
-WORKDIR $HOME/hello_app
+WORKDIR $HOME/app/hello
 
 EXPOSE 8000
 
