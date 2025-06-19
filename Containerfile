@@ -34,7 +34,10 @@ RUN pip install Django \
   && python -m django --version
 
 RUN django-admin startproject hello_app \
-  && cd hello_app
+  && cd hello_app \
+  && ls -lisah
+
+WORKDIR $HOME/hello_app
 
 EXPOSE 8000
 
