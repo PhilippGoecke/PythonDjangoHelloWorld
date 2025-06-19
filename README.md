@@ -1,4 +1,7 @@
-# first Django app
+# PythonDjangoHelloWorld
+Python Django Hello World  
+
+https://www.djangoproject.com/  
 
 Source: https://docs.djangoproject.com/en/4.1/intro/tutorial01/  
 
