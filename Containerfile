@@ -40,7 +40,7 @@ WORKDIR $HOME/app/hello_project
 RUN python manage.py startapp hello_app \
   && ls -lisah hello_app \
   && echo "from django.http import HttpResponse\n\ndef index(request):\n    name = request.GET.get('name', 'World')\n    return HttpResponse(f'Hello {name}!')" >> hello_app/views.py \
-  && sed -i "s%urlpatterns = [%from hello_app import views\n\nurlpatterns = [%g" hello_project/urls.py \
+  && sed -i "s%urlpatterns = \[%from hello_app import views\n\nurlpatterns = \[%g" hello_project/urls.py \
   && sed -i "s%]%    path('',views.index, name='greeting')\n    ]%g" hello_project/urls.py \
   && python manage.py migrate
 
