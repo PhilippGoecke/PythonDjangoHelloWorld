@@ -33,11 +33,19 @@ RUN pip install Django \
   && pip freeze \
   && python -m django --version
 
-RUN django-admin startproject hello \
-  && cd hello \
-  && ls -lisah
+RUN django-admin startproject hello_project
 
-WORKDIR $HOME/app/hello
+WORKDIR $HOME/app/hello_project
+
+RUN python manage.py startapp hello_app \
+  && ls -lisah hello_app \
+  && echo "from django.http import HttpResponse\ndef index(request):\n    return HttpResponse('Hello, World!')" >> hello_app/views.py \
+  && cat hello_app/views.py \
+  && sed -i "s%urlpatterns = [%from hello_app import views\n\nurlpatterns = [%g" hello_project/urls.py \
+  && sed -i "s%]%    path('',views.index, name='homepage')\n    ]%g" hello_project/urls.py \
+  && echo #################### \
+  && cat hello_project/urls.py \
+  && python manage.py migrate
 
 EXPOSE 8000
 
